@@ -53,7 +53,7 @@ contract CryptoMaze is ERC721, ReentrancyGuard, Ownable {
     Counters.Counter private _tokenIds;
 
     //MAX_SUPPLY => 3089;
-    uint256 public RESERVED = 20;
+    uint256 public reserved = 20;
     uint256 public constant MAX_PUBLIC_SUPPLY = 3069;
     uint256 public constant MAX_BY_MINT = 10;
     uint256 public constant PRICE_TOKEN = 0.005 ether;
@@ -125,12 +125,12 @@ contract CryptoMaze is ERC721, ReentrancyGuard, Ownable {
     function giveAway(address to) external onlyOwner {
         uint256 tokenId = _tokenIds.current();
 
-        require(RESERVED > 0, "Exceeds reserved NFT supply" );
+        require(reserved > 0, "Exceeds reserved NFT supply" );
 
         _safeMint(to, tokenId);
 
         _tokenIds.increment();
-        RESERVED -= 1;
+        reserved -= 1;
     }
 
     function withdraw() external nonReentrant onlyOwner {
